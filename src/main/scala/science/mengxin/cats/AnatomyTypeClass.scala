@@ -23,6 +23,7 @@ trait JsonWriter[A] {
 
 final case class Person(name: String, email: String)
 
+// any definitions marked implicit in Scala MUST BE placed inside an object or trait
 object JsonWriterInstances {
   implicit val stringWriter: JsonWriter[String] =
     new JsonWriter[String] {
