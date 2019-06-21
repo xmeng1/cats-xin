@@ -1,6 +1,7 @@
 package science.mengxin.cats.eq
 
 import cats.kernel.Eq
+import science.mengxin.cats.Cat
 
 object EqMain extends App {
   //List(1, 2, 3).map(Option(_)).filter(item ⇒ item.get == 1)
@@ -22,11 +23,10 @@ object EqMain extends App {
 
   import java.util.Date
   import cats.instances.long._ // for Eq
+  import cats.instances.string._ // for Eq
 
   implicit val dateEq: Eq[Date] =
-    Eq.instance[Date] { (date1, date2) =>
-      date1.getTime === date2.getTime
-    }
+    Eq.instance[Date]((date1, date2) => date1.getTime === date2.getTime)
 
   val x = new Date() // now
   val y = new Date() // a bit later than now
@@ -34,4 +34,16 @@ object EqMain extends App {
   x === x // res13: Boolean = true
 
   x === y // res14: Boolean = false
+
+  import cats.instances.int._ // for Eq
+  import cats.instances.string._ // for Eq
+  import cats.Eq
+  import cats.syntax.eq._ // for ===
+
+  implicit val catEqual: Eq[Cat] =
+    Eq.instance[Cat] { (cat1, cat2) =>
+      (cat1.name === cat2.name) &&
+      (cat1.age === cat2.age) &&
+      (cat1.color === cat2.color)
+    }
 }
