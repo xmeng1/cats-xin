@@ -1,3 +1,4 @@
+/*
 package science.mengxin.cats.monoid
 
 class MonoidDemo {}
@@ -17,14 +18,15 @@ class MonoidDemo {}
 //  }
 //}
 
-trait Semigroup[A] {
+trait Semigroup1[A] {
   def combine(x: A, y: A): A
 }
 
-trait Monoid[A] extends Semigroup[A] {
+trait Monoid1[A] extends Semigroup1[A] {
   def empty: A
 }
 
-object IntSemiGroup extends Semigroup[Int] {
+object IntSemiGroup extends Semigroup1[Int] {
   def combine(a: Int, b: Int): Int = a + b
 }
+*/

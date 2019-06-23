@@ -39,8 +39,9 @@ object MonoidCats extends App {
 
   def add(items: List[Int]): Int = items.foldLeft(Monoid[Int].empty)(_ |+| _)
 
-  import cats.syntax.semigroup._ // for |+|
   import cats.Monoid
+  import cats.instances.int._ // for Monoid
+  import cats.syntax.semigroup._ // for |+|
   def add[A: Monoid](items: List[A]): A =
     items.foldLeft(Monoid[A].empty)(_ |+| _)
 
@@ -51,4 +52,15 @@ object MonoidCats extends App {
   // all element is Some, we don't have Some implicit instance
   import cats.instances.long._
   add(List(Some(1L), None, Some(2L), None, Some(3L)))
+
+  case class Order(totalCost: Double, quantity: Double)
+
+  implicit val monoid: Monoid[Order] = new Monoid[Order] {
+    def combine(o1: Order, o2: Order) =
+      Order(o1.totalCost + o2.totalCost, o1.quantity + o2.quantity)
+
+    def empty = Order(0, 0)
+  }
+
+  add(List(Order(1, 2), Order(2, 3)))
 }
