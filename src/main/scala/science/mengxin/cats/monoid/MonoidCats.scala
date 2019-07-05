@@ -47,7 +47,7 @@ object MonoidCats extends App {
 
   add(List(Some(1), None, Some(2), None, Some(3)))
 
-  import cats.instances._
+//  import cats.instances._
 //  add(List(Some(1), Some(2), Some(3)))
   // all element is Some, we don't have Some implicit instance
   import cats.instances.long._
